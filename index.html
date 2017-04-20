@@ -1,0 +1,388 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Docker how to</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<img class="plain" data-src="img/docker-large-h-trans.png">
+					<p>Build, Ship, Run</p>
+				</section>
+				<section>
+					<h2>What is Docker?</h2>
+					<p>Docker allows you to package an application with all of its dependencies into a standardized unit for software development.</p>
+				</section>
+                <section>
+                    <section>
+                        <h2>Interest</h2>
+                        <img class="plain" data-src="img/interest.png">
+                    </section>
+                    <section>
+                        <h2>What is Docker?</h2>
+                        <p>Docker containers wrap up a piece of software in a complete filesystem that contains everything it needs to run: code, runtime, system tools, system libraries – anything you can install on a server. This guarantees that it will always run the same, regardless of the environment it is running in.</p>
+                        <img class="plain" data-src="img/what_is_layered_filesystems_sm.png">
+                    </section>
+                    <section>
+                        <h2>Lightweight</h2>
+                        <p>Containers running on a single machine all share the same operating system kernel so they start instantly and make more efficient use of RAM. Images are constructed from layered filesystems so they can share common files, making disk usage and image downloads much more efficient.</p>
+                    </section>
+                    <section>
+                        <h2>Open</h2>
+                        <p>Docker containers are based on open standards allowing containers to run on all major Linux distributions and Microsoft operating systems with support for every infrastructure.</p>
+                    </section>
+                    <section>
+                        <h2>Secure</h2>
+                        <p>Containers isolate applications from each other and the underlying infrastructure while providing an added layer of protection for the application.</p>
+                    </section>
+                    <section>
+                        <h2>VM diagram</h2>
+                        <img class="plain" data-src="img/vm-diagram.png">
+                    </section>
+                    <section>
+                        <h2>Docker diagram</h2>
+                        <img class="plain" data-src="img/docker-diagram.png">
+                    </section>
+                    <section>
+                        <h2>VM vs Containers</h2>
+                        <img class="plain" data-src="img/contvsvm.png">
+                    </section>
+                    <section>
+                        <h2>Docker on Linux</h2>
+                        <img class="plain" data-src="img/linux_docker_host.svg">
+                    </section>
+                    <section>
+                        <h2>Docker on OS X</h2>
+                        <img class="plain" data-src="img/mac_docker_host.svg">
+                    </section>
+                </section>
+                <section>
+                    <h2>How it helps build better software</h2>
+                    <p>When your app is in Docker containers, you don’t have to worry about setting up and maintaining different environments or different tooling for each language. Focus on creating new features, fixing issues and shipping software.</p>
+                </section>
+                <section>
+                    <h2>Starting develop existing project</h2>
+                    <ol>
+                        <li>try to run the code</li>
+                        <li>get an obscure error message</li>
+                        <li>Google it</li>
+                        <li>try random suggestions you find on StackOverflow</li>
+                        <li>go back to step 1</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Configure once, run anything</h2>
+                    <ul>
+                        <li>Make the entire lifecycle more efficient, consistent, and repeatable</li>
+                        <li>Increase the quality of code produced by developers</li>
+                        <li>Eliminate inconsistencies between development, test, production, and customer environments</li>
+                        <li>Support segregation of duties</li>
+                        <li>Significantly improves the speed and reliability of continuous deployment and continuous integration systems</li>
+                        <li>Because the containers are so lightweight, address significant performance, costs, deployment, and portability issues normally associated with VMs</li>
+                    </ul>
+                </section>
+				<section>
+					<section>
+						<h2>Terminology</h2>
+						<ul>
+							<li>Images</li>
+							<li>Containers</li>
+							<li>Docker Daemon</li>
+							<li>Docker Machine</li>
+							<li>Docker Client</li>
+							<li>Docker Hub</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Images</h2>
+						<p>The blueprints of our application which form the basis of containers</p>
+						<img class="plain" data-src="img/architecture.svg">
+					</section>
+					<section>
+						<h2>Containers</h2>
+						<p>Created from Docker images and run the actual application</p>
+						<img class="plain" data-src="img/architecture.svg">
+					</section>
+					<section>
+						<h2>Docker Daemon</h2>
+						<p>The background service running on the host that manages building, running and distributing Docker containers</p>
+						<img class="plain" data-src="img/architecture.svg">
+					</section>
+					<section>
+						<h2>Docker Client</h2>
+						<p>The command line tool that allows the user to interact with the daemon</p>
+						<img class="plain" data-src="img/architecture.svg">
+					</section>
+					<section>
+						<h2>Docker Hub</h2>
+						<p>A registry of Docker images</p>
+						<img class="plain" data-src="img/docker-hub.png">
+					</section>
+				</section>
+                <section>
+                    <section>
+                        <h2>Docker Tools</h2>
+                        <ul>
+                            <li>Docker Machine for running the <code><strong>docker-machine</strong></code> binary</li>
+                            <li>Docker Engine for running the <code><strong>docker</strong></code> binary</li>
+                            <li>Docker Compose for running the <code><strong>docker-compose</strong></code> binary</li>
+                            <li>Kitematic, the Docker GUI</li>
+                            <li>a shell preconfigured for a Docker command-line environment</li>
+                            <li>Oracle VM VirtualBox</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Docker Toolbox</h2>
+                        <p>Quickstart Terminal & Kitematic</p>
+                        <img class="plain" data-src="img/docker_toolbox.png">
+                    </section>
+                </section>
+				<section>
+					<h2>Official support</h2>
+					<img class="plain" data-src="img/eine-einfhrung-in-docker-24-638.jpg">
+				</section>
+				<section>
+                    <section>
+                        <h2>Docker Machine</h2>
+                        <img class="plain" data-src="img/DOCKER-MACHINE.png">
+                    </section>
+                    <section>
+                        <h2>Docker Machine - drivers</h2>
+                        <ul>
+                            <li>VirtualBox</li>
+                            <li>DigitalOcean</li>
+                            <li>Microsoft Azure</li>
+                            <li>Amazon EC2</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Docker Machine</h2>
+                        <p>Docker Machine is a tool that lets you install Docker Engine on virtual hosts, and manage the hosts with docker-machine commands</p>
+					    <pre>
+						    <code class="bash" data-trim contenteditable>
+docker-machine create --driver virtualbox --engine-insecure-registry 10.5.5.86:5000 [machine-name]
+
+docker-machine ls
+
+eval (docker-machine env [machine-name])
+						    </code>
+					    </pre>
+                    </section>
+                </section>
+                <section>
+                    <h2>Basic commands</h2>
+                    <pre>
+                        <code class="bash" data-trim contenteditable>
+docker build
+docker run
+docker stop
+docker logs
+docker images
+docker ps [-a]
+docker port
+docker network
+docker rm [container]
+docker rmi [image]
+docker-machine ip
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Ubuntu example</h2>
+                    <p><code>docker pull ubuntu</code></p>
+                    <p><code>docker run ubuntu echo "Hello, World"</code></p>
+                </section>
+                <section>
+                    <h2>Dockerfile</h2>
+					<pre><code class="dockerfile" data-trim contenteditable>
+FROM node:argon
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Install app dependencies
+COPY package.json /usr/src/app/
+RUN npm install
+
+# Bundle app source
+COPY . /usr/src/app
+
+EXPOSE 8080
+CMD ["npm", "start"]
+					</code></pre>
+                </section>
+                <section>
+                    <h2>Docker Hub/Docker Registry</h2>
+					<pre>
+						<code class="bash" data-trim contenteditable>
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+docker pull ubuntu && docker tag ubuntu localhost:5000/ubuntu
+
+docker push localhost:5000/ubuntu
+
+docker pull localhost:5000/ubuntu
+
+docker stop registry && docker rm -v registry
+						</code>
+					</pre>
+                </section>
+                <section>
+                    <section>
+                        <h2>Docker Compose</h2>
+                        <img class="plain" data-src="img/Compose.png">
+                    </section>
+                    <section>
+                        <h2>Docker Compose</h2>
+                        <ul>
+                            <li>Build images from Dockerfile</li>
+                            <li>Pull images from the Hub or privaate registry</li>
+                            <li>Configure and create containers</li>
+                            <li>Start and stop containers</li>
+                            <li>Stream their logs</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Docker Compose</h2>
+                        <ul>
+                            <li>New command: <code>docker up</code></li>
+                            <li>Enhanced commands: <code>docker build</code>, <code>pull</code>, <code>run</code>, <code>start</code>, <code>stop</code>, <code>kill</code>, <code>rm</code>...</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Docker Compose</h2>
+					    <pre>
+						    <code class="bash" data-trim contenteditable>
+docker pull redis:latest
+
+docker build -t web .
+
+docker run -d --name=db redis:latest redis-server --appendonly yes
+
+docker run -d --name=web --link db:db -p 5000:5000 -v `pwd`:/code web python app.py
+						    </code>
+					    </pre>
+                    </section>
+                    <section>
+                        <h2>Docker Compose</h2>
+					    <pre>
+						    <code class="yaml" data-trim contenteditable>
+wordpress:
+  image: wordpress
+  links:
+    - wordpress_db:mysql
+  ports:
+    - 8080:80
+wordpress_db:
+  image: mariadb
+  environment:
+    MYSQL_ROOT_PASSWORD: examplepass
+phpmyadmin:
+  image: corbinu/docker-phpmyadmin
+  links:
+    - wordpress_db:mysql
+  ports:
+    - 8181:80
+  environment:
+    MYSQL_USERNAME: root
+    MYSQL_ROOT_PASSWORD: examplepass
+						    </code>
+					    </pre>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h2>Docker Swarm</h2>
+                        <p>Native Clustering System</p>
+                        <img class="plain" data-src="img/SWARM.png">
+                    </section>
+                    <section>
+                        <h2>Docker Swarm</h2>
+                        <img class="plain" data-src="img/image00.png">
+                    </section>
+                    <section>
+                        <h2>Docker Swarm</h2>
+                        <ul>
+                            <li>Docker client endpoint that proxies requests to Docker daemons running in a cluster</li>
+                            <li>Cluster manager that keeps state of the cluster nodes</li>
+                            <li>Easily run as a container itself</li>
+                            <li>Multiple service discoveries for cluster nodes (docker hosted, etcd, consul, zookeeper, file based)</li>
+                        </ul>
+                    </section>
+                </section>
+                <section>
+                    <h2>FLow</h2>
+                    <img class="plain" data-src="img/docker-machine-full-process.png">
+                </section>
+                <section>
+                    <h2>AWS & Beanstalk</h2>
+
+                    <img class="plain" data-src="img/dockerhub-to-elasticbeanstalk.png">
+                </section>
+                <section>
+                    <h2>Kubernetes</h2>
+                    <img class="plain" data-src="img/kube7-logo.png">
+                </section>
+                <section>
+                    <h2>Summary</h2>
+                    <ul>
+                        <li>Images</li>
+                        <li>Containers</li>
+                        <li>Docker daemon / Docker engine</li>
+                        <li>Docker Client</li>
+                        <li>Docker Hub / Docker Registry</li>
+                        <li>Docker Machine</li>
+                        <li>Docker Swarm</li>
+                        <li>Docker Compose</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Some resources</h2>
+                    <ul>
+                        <li><a href="http://www.ybrikman.com/writing/2015/05/19/docker-osx-dev/">http://www.ybrikman.com/writing/2015/05/19/docker-osx-dev/</a></li>
+                    </ul>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
