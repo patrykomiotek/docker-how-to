@@ -1,5 +1,5 @@
 # Docker How To
-Presentation uses reveal.js [reveal.js](https://github.com/hakimel/reveal.js)
+This presentation uses [reveal.js](https://github.com/hakimel/reveal.js)
 
 See also [examples](https://github.com/patrykomiotek/docker-how-to/tree/master/examples) folder
 
